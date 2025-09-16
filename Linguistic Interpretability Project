@@ -1,0 +1,21 @@
+Two Jupyter Notebook files and 1 data CONLLU file: de_gsd-ud-train
+
+Data blocks explained with steps to run:
+1. Dataset creation from the CONLLU file with minimal pairs
+
+2. Causal intervention patching on all heads with the corrupt article. It identifies which heads are most reliable (appear consistently across sentences) versus which are context-dependent (highly variable effects), and breaks down patterns by article position and article type transitions.
+
+3. Gender_Encoding.ipynb: Identify heads that map gender for articles. Creates experimental stimuli by substituting nouns with different genders into sentence templates to generate both grammatical and ungrammatical examples for testing gender agreement in German.
+
+4. Next, we extract attention head representations from multilingual BERT for German articles in different grammatical contexts, then uses Logistic Regression to identify which attention heads are most sensitive to noun gender and grammatical agreement by testing their ability to predict gender and grammaticality from the representations. Obtained gender-encoding heads (the code in the main file had suspiciously high accuracy rates with cross-validation, so scrapped)
+
+5. Error-Sensitive head analysis: compares attention head representations between grammatically correct and incorrect German sentences to identify which heads are most sensitive to gender agreement errors by measuring differences in hidden states, cosine similarity, and attention patterns, then ranking heads by a customized sensitivity score.
+
+6. Next, we test how attention heads work together by measuring individual head effects, pairwise synergy (whether two heads have additive or interactive effects), and causal chains (how patching one head influences another. Only causal chains was run for the last run due to compute constraint.  
+
+7. Next, extract_ud_test_sentences function extracts German sentences from Universal Dependencies test data that contain definite articles (der, die, das, etc.), returning tuples of (sentence, article, gender) to create a test dataset for evaluating model performance on gender agreement after attention head ablation.
+
+8. Finally, we perform attention head ablation by zeroing out specific attention heads and measures the impact on masked language modeling using distribution distance metrics (KL divergence, Jensen-Shannon divergence, L2 distance) rather than accuracy, to quantify how much each head contributes to predicting German articles.
+
+
+Simply run cell one after another for main file and separately for Gender_Encoding file as mentioned, in the 3rd block. 

@@ -2,8 +2,8 @@
 Analyzing attention heads to see how mBERT processes gender morphology in languages with gendered nouns.
 
 
-Linguistic_Interpretability.ipynb
-Core Analysis: Tests attention heads' sensitivity to gender agreement violations by comparing model behavior on correct vs. incorrect article-noun pairs.
+### Linguistic_Interpretability.ipynb
+####Core Analysis: Tests attention heads' sensitivity to gender agreement violations by comparing model behavior on correct vs. incorrect article-noun pairs.
 Key Components:
 
 Minimal Pairs Generation: Creates pairs like "Der Mann" (correct) vs "Die Mann" (incorrect gender agreement) from German UD corpus
